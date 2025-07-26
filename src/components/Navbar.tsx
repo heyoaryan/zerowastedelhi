@@ -43,7 +43,7 @@ const Navbar: React.FC = () => {
           <Link to="/" className="flex items-center space-x-2">
             <motion.img
               whileHover={{ scale: 1.05 }}
-              src="/src/assets/logo.png"
+              src="/logo.png"
               alt="Zero Waste Delhi Logo"
               className="w-10 h-10 rounded-full object-cover shadow-md"
             />

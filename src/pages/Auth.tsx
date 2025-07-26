@@ -67,7 +67,7 @@ const Auth: React.FC<AuthProps> = ({ mode }) => {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            src="/src/assets/logo.png" // adjust if needed
+            src="/logo.png" // adjust if needed
             alt="Zero Waste Delhi Logo"
             className="mx-auto h-20 w-20 rounded-full object-cover shadow-lg ring-2 ring-green-500"/>
 
