@@ -1,5 +1,5 @@
 // Debug your specific location issue
-const API_BASE_URL = "http://localhost:5000";
+const API_BASE_URL = "https://zero-waste-delhi-backend-hsqb.onrender.com";
 
 async function debugYourLocation() {
   console.log("🔍 DEBUGGING YOUR LOCATION ISSUE");
