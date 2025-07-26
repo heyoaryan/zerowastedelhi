@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test LocalStorage Data</title>
+</head>
+<body>
+    <h1>Testing LocalStorage Data for Dashboard</h1>
+    <div id="results"></div>
+    
+    <button onclick="clearAndLogin()">Clear & Simulate Login</button>
+    <button onclick="testDashboardCall()">Test Dashboard API Call</button>
+    
+    <script>
+        function displayCurrentData() {
+            const results = document.getElementById('results');
+            
+            const userData = localStorage.getItem('user');
+            const token = localStorage.getItem('token');
+            const sessionId = localStorage.getItem('sessionId');
+            
+            results.innerHTML = `
+                <h2>Current LocalStorage:</h2>
+                <p><strong>User Data:</strong> ${userData || 'Not found'}</p>
+                <p><strong>Token:</strong> ${token ? 'Present' : 'Not found'}</p>
+                <p><strong>Session ID:</strong> ${sessionId || 'Not found'}</p>
+            `;
+            
+            if (userData) {
+                try {
+                    const userInfo = JSON.parse(userData);
+                    results.innerHTML += `
+                        <h3>Parsed User Info:</h3>
+                        <p><strong>Name:</strong> ${userInfo.name}</p>
+                        <p><strong>Email:</strong> ${userInfo.email}</p>
+                        <p><strong>ID:</strong> ${userInfo.id}</p>
+                    `;
+                } catch (e) {
+                    results.innerHTML += `<p style="color: red;">Error parsing user data: ${e.message}</p>`;
+                }
+            }
+        }
+        
+        function clearAndLogin() {
+            // Clear existing data
+            localStorage.clear();
+            
+            // Simulate what happens after Garima logs in
+            const garimaUserData = {
+                id: '6885060b23b8d78768fd7eda',
+                name: 'Garima Jain',
+                email: 'jaingarima360@gmail.com',
+                phone: '+91 00000 00000',
+                avatar: '👤',
+                totalWaste: 0, // Will be updated from API
+                rewardPoints: 0, // Will be updated from API
+                joinedDate: '2025-07-26'
+            };
+            
+            localStorage.setItem('user', JSON.stringify(garimaUserData));
+            localStorage.setItem('token', 'fake-token-for-testing');
+            
+            displayCurrentData();
+            
+            document.getElementById('results').innerHTML += `
+                <p style="color: green;"><strong>✅ Simulated Garima login complete</strong></p>
+                <p>Dashboard should now fetch data for: ${garimaUserData.email}</p>
+            `;
+        }
+        
+        async function testDashboardCall() {
+            const userData = localStorage.getItem('user');
+            if (!userData) {
+                alert('Please simulate login first');
+                return;
+            }
+            
+            const userInfo = JSON.parse(userData);
+            const email = userInfo.email;
+            
+            try {
+                const statsUrl = `http://localhost:5000/api/simple-waste/stats?userEmail=${encodeURIComponent(email)}`;
+                console.log('Testing URL:', statsUrl);
+                
+                const response = await fetch(statsUrl);
+                const data = await response.json();
+                
+                document.getElementById('results').innerHTML += `
+                    <h3>Dashboard API Test:</h3>
+                    <p><strong>URL:</strong> ${statsUrl}</p>
+                    <p><strong>Status:</strong> ${response.status}</p>
+                    <p><strong>Success:</strong> ${data.success}</p>
+                    <p><strong>Total Weight:</strong> ${data.stats?.totalWeight || 0} kg</p>
+                    <p><strong>Total Points:</strong> ${data.stats?.totalPoints || 0}</p>
+                    <p style="color: ${data.stats?.totalWeight > 0 ? 'green' : 'red'};">
+                        <strong>${data.stats?.totalWeight > 0 ? '✅ Data found!' : '❌ No data found'}</strong>
+                    </p>
+                `;
+            } catch (error) {
+                document.getElementById('results').innerHTML += `
+                    <p style="color: red;"><strong>❌ API Error:</strong> ${error.message}</p>
+                `;
+            }
+        }
+        
+        // Display current data on load
+        displayCurrentData();
+    </script>
+</body>
+</html>

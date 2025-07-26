@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Browser Login State</title>
+</head>
+<body>
+    <h1>Testing Browser Login State</h1>
+    <div id="results"></div>
+    
+    <script>
+        function testLoginState() {
+            const results = document.getElementById('results');
+            
+            // Check localStorage
+            const userData = localStorage.getItem('user');
+            const token = localStorage.getItem('token');
+            const sessionId = localStorage.getItem('sessionId');
+            
+            results.innerHTML = `
+                <h2>LocalStorage Contents:</h2>
+                <p><strong>User Data:</strong> ${userData || 'Not found'}</p>
+                <p><strong>Token:</strong> ${token ? 'Present' : 'Not found'}</p>
+                <p><strong>Session ID:</strong> ${sessionId || 'Not found'}</p>
+                
+                <h2>Parsed User Info:</h2>
+            `;
+            
+            if (userData) {
+                try {
+                    const userInfo = JSON.parse(userData);
+                    results.innerHTML += `
+                        <p><strong>Name:</strong> ${userInfo.name}</p>
+                        <p><strong>Email:</strong> ${userInfo.email}</p>
+                        <p><strong>ID:</strong> ${userInfo.id}</p>
+                    `;
+                    
+                    // Test API call
+                    testAPICall(userInfo.email);
+                } catch (e) {
+                    results.innerHTML += `<p style="color: red;">Error parsing user data: ${e.message}</p>`;
+                }
+            }
+        }
+        
+        async function testAPICall(email) {
+            const results = document.getElementById('results');
+            
+            try {
+                const response = await fetch(`http://localhost:5000/api/simple-waste/stats?userEmail=${encodeURIComponent(email)}`);
+                const data = await response.json();
+                
+                results.innerHTML += `
+                    <h2>API Test Results:</h2>
+                    <p><strong>Status:</strong> ${response.status}</p>
+                    <p><strong>Success:</strong> ${data.success}</p>
+                    <p><strong>Total Weight:</strong> ${data.stats?.totalWeight || 0} kg</p>
+                    <p><strong>Total Points:</strong> ${data.stats?.totalPoints || 0}</p>
+                    <p><strong>Total Entries:</strong> ${data.stats?.totalEntries || 0}</p>
+                `;
+                
+                if (data.success && data.stats?.totalWeight > 0) {
+                    results.innerHTML += `<p style="color: green;"><strong>✅ Data found! Dashboard should show this data.</strong></p>`;
+                } else {
+                    results.innerHTML += `<p style="color: red;"><strong>❌ No data found for this user.</strong></p>`;
+                }
+            } catch (error) {
+                results.innerHTML += `<p style="color: red;">API Error: ${error.message}</p>`;
+            }
+        }
+        
+        // Run test when page loads
+        testLoginState();
+    </script>
+</body>
+</html>
