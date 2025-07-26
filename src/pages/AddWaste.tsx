@@ -125,7 +125,7 @@ const AddWaste: React.FC = () => {
             // Call backend API directly for accurate location detection
             console.log('🎯 Getting accurate location from backend for coordinates:', latitude, longitude);
             console.log('🔍 GPS Accuracy:', accuracy + 'm');
-            const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+            const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://zero-waste-delhi-backend-hsqb.onrender.com';
             const response = await fetch(
               `${API_BASE_URL}/api/location/info?latitude=${latitude}&longitude=${longitude}`
             );
@@ -351,7 +351,7 @@ const AddWaste: React.FC = () => {
     if (wasteData.weight && wasteData.type && location) {
       setSubmitting(true);
       try {
-        const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://zero-waste-delhi-backend-hsqb.onrender.com';
         
         // Get user data from localStorage
         const userData = localStorage.getItem('user');

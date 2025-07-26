@@ -42,7 +42,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     
     if (savedUser && token) {
       // Verify token is still valid by making a test request
-      const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://zero-waste-delhi-backend-hsqb.onrender.com';
       fetch(`${API_BASE_URL}/api/auth/me`, {
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -75,7 +75,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setLoading(true);
     
     try {
-      const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://zero-waste-delhi-backend-hsqb.onrender.com';
       console.log('🔐 Attempting login to:', `${API_BASE_URL}/api/auth/login`);
       
       const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
@@ -139,7 +139,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setLoading(true);
     
     try {
-      const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://zero-waste-delhi-backend-hsqb.onrender.com';
       console.log('📝 Attempting signup to:', `${API_BASE_URL}/api/auth/register`);
       
       const response = await fetch(`${API_BASE_URL}/api/auth/register`, {

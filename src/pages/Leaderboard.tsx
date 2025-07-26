@@ -51,7 +51,7 @@ const Leaderboard: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const { user } = useAuth();
 
-  const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+  const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://zero-waste-delhi-backend-hsqb.onrender.com';
 
   const fetchLeaderboardData = async () => {
     try {

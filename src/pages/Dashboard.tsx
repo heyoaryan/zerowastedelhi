@@ -57,7 +57,7 @@ const Dashboard: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+  const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://zero-waste-delhi-backend-hsqb.onrender.com';
 
   const fetchDashboardData = async () => {
     try {

@@ -69,7 +69,7 @@ const BinTracker: React.FC = () => {
 
   const fetchLocationInfo = async (latitude: number, longitude: number) => {
     try {
-      const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://zero-waste-delhi-backend-hsqb.onrender.com';
       const response = await fetch(
         `${API_BASE_URL}/api/location/info?latitude=${latitude}&longitude=${longitude}`
       );
