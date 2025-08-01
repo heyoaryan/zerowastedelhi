@@ -87,7 +87,7 @@ const Contact: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             className="text-xl text-green-100 max-w-3xl mx-auto">
-            <strong>This is a prototype developed under IBM SkillsBuild.</strong><br></br>
+            <strong>This is a prototype developed by Aryan Singh Thakur.</strong><br></br>
             We aim to transform waste management in Delhi through technology and community action.
             Want to report an issue or collaborate with us?<br></br>  
             We're here to help build a smarter, cleaner future together.
