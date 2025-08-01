@@ -148,11 +148,11 @@ const Home: React.FC = () => {
       {/* Marquee for IBM SkillsBuild Prototype */}
       <div className="bg-gradient-to-r from-green-600 to-blue-600 py-2 overflow-hidden">
         <div className="whitespace-nowrap animate-marquee text-white font-semibold text-lg tracking-wide">
-        🚀This is a prototype project developed for 🧠Aryan Singh Thakur. &nbsp; 
-        🚀This is a prototype project developed for 🧠Aryan Singh Thakur. &nbsp;
-        🚀This is a prototype project developed for 🧠Aryan Singh Thakur. &nbsp;
-        🚀This is a prototype project developed for 🧠Aryan Singh Thakur. &nbsp;
-        🚀This is a prototype project developed for 🧠Aryan Singh Thakur. &nbsp;
+        🚀This is a Prototype Project Developed By 🧠Aryan Singh Thakur. &nbsp; 
+        🚀This is a Prototype Project Developed By 🧠Aryan Singh Thakur. &nbsp;
+        🚀This is a Prototype Project Developed By 🧠Aryan Singh Thakur. &nbsp;
+        🚀This is a Prototype Project Developed By 🧠Aryan Singh Thakur. &nbsp;
+        🚀This is a Prototype Project Developed By 🧠Aryan Singh Thakur. &nbsp;
         </div>
       </div>
 
